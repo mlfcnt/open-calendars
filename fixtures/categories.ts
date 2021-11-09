@@ -3,14 +3,17 @@ import { Category } from "../types";
 export const categories: Category[] = [
   {
     id: 1,
-    name: "Film",
+    name: "Sortie ciné",
+    emoji: "🍿",
   },
   {
     id: 2,
-    name: "Sport",
+    name: "RDV sportifs",
+    emoji: "🏈",
   },
   {
     id: 3,
-    name: "Séries",
+    name: "Sortie Séries",
+    emoji: "📺",
   },
 ];
