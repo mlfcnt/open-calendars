@@ -9,7 +9,7 @@ const Home: NextPage = () => {
   const grouppedByCategories = groupBy(calendars, "categoryId");
   return (
     <div>
-      <h1 className={styles.title}>Don't miss it</h1>
+      <h1 className={styles.title}>open-calendars</h1>
       <main>
         <div
           style={{
