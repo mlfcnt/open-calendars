@@ -5,6 +5,7 @@ import Link from "next/link";
 const Calendar = () => {
   const router = useRouter();
   const { calendarId } = router.query;
+  if (typeof calendarId !== "string") return null;
 
   const calendar = calendars.find((x) => x.id === +calendarId);
   return (
