@@ -9,4 +9,6 @@ export type Calendar = {
   name: string;
   url: string;
   categoryId: number;
+  stars: number;
+  description?: string;
 };
