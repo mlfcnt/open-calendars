@@ -8,6 +8,7 @@ const Calendar = () => {
   if (typeof calendarId !== "string") return null;
 
   const calendar = calendars.find((x) => x.id === +calendarId);
+  if (!calendar) return null;
   return (
     <div>
       <header>
