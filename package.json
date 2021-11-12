@@ -8,17 +8,26 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@prisma/client": "^3.4.2",
     "lodash": "^4.17.21",
     "next": "12.0.3",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "swr": "^1.0.1"
   },
   "devDependencies": {
+    "@types/faker": "^5.5.9",
     "@types/lodash": "^4.14.176",
     "@types/node": "16.11.7",
     "@types/react": "17.0.34",
     "eslint": "7.32.0",
     "eslint-config-next": "12.0.3",
+    "faker": "^5.5.3",
+    "prisma": "^3.4.2",
+    "ts-node": "^10.4.0",
     "typescript": "4.4.4"
+  },
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
   }
 }

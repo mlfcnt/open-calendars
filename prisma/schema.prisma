@@ -1,0 +1,30 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["mongoDb"]
+}
+
+model Category {
+  id          String     @id @default(dbgenerated()) @map("_id") @db.ObjectId
+  name        String
+  description String?
+  createdAt   DateTime   @default(now())
+  Calendar    Calendar[]
+}
+
+model Calendar {
+  id         String   @id @default(dbgenerated()) @map("_id") @db.ObjectId
+  name       String
+  url        String
+  stars      Int
+  createdAt  DateTime @default(now())
+  categoryId String   @db.ObjectId
+  category   Category @relation(fields: [categoryId], references: [id])
+}
