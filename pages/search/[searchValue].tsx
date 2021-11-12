@@ -15,7 +15,7 @@ const Search = () => {
   if (!searchResults.length)
     return (
       <>
-        <p>No calendars with a name countaining {searchValue} found</p>{" "}
+        <p>No calendars with a name containing {searchValue} found</p>{" "}
         <Link href={"/"}>
           <a>Back to home</a>
         </Link>
