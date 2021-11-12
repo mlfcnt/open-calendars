@@ -13,7 +13,14 @@ const Search = () => {
   if (!searchResults) return <Loading />;
 
   if (!searchResults.length)
-    return <p>No calendars with a name countaining {searchValue} found</p>;
+    return (
+      <>
+        <p>No calendars with a name countaining {searchValue} found</p>{" "}
+        <Link href={"/"}>
+          <a>Back to home</a>
+        </Link>
+      </>
+    );
 
   const distinctCategories = searchResults.reduce((categories, calendar) => {
     if (!categories.some((x) => x.id === calendar.category.id)) {
