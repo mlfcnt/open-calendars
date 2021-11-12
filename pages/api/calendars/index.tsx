@@ -14,6 +14,7 @@ export default async function calendarsHandler(
     orderBy: {
       stars: "desc",
     },
+    take: 10,
   });
   res.status(200).json(calendars);
 }

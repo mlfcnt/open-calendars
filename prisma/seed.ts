@@ -1,12 +1,12 @@
 import { PrismaClient, Prisma } from "@prisma/client";
-import faker, { fake } from "faker";
+import faker from "faker";
 
 const prisma = new PrismaClient();
 
 const AMOUNT_OF_CALS_TO_CREATE = 150;
 
 const categoriesToCreate = [
-  " Movie",
+  "Movie",
   "TV Show",
   "Sports",
   "Music",
@@ -28,8 +28,9 @@ const generateFakeCalendar = async () => {
 
   return {
     name: faker.random.words(),
-    url: faker.internet.url(),
+    url: "https://calendar.google.com/calendar/embed?src=otpef10f3afpfs6u3ljcu2fsa0%40group.calendar.google.com&ctz=Europe%2FParis",
     stars: faker.datatype.number(300),
+    description: faker.random.words(),
     category: {
       connect: {
         id: categoryForThisCalendar?.id,

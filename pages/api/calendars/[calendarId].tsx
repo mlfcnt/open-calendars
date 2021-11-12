@@ -12,6 +12,7 @@ export default async function calendarHandler(
   const {
     query: { calendarId },
   } = req;
+  if (!calendarId) return {};
   const prisma = new PrismaClient();
   const calendar = await prisma.calendar.findUnique({
     where: {
@@ -22,4 +23,4 @@ export default async function calendarHandler(
 }
 
 export const useCalendar = (calendarId: string | string[] | undefined) =>
-  useSWR<Calendar>(`/api/calendars/${calendarId}`, fetcher);
+  useSWR<Calendar>(calendarId ? `/api/calendars/${calendarId}` : null, fetcher);

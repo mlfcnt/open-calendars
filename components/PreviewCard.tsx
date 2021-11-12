@@ -22,10 +22,19 @@ export const PreviewCard = ({
           <Link href={`/calendars/${calendar.id}`}>
             <a>{calendar.name}</a>
           </Link>
+          <a href={calendar.url} target="_blank" rel="noreferrer">
+            <span> 📆</span>
+          </a>
           <span> | {calendar.stars}⭐</span>
         </div>
       ))}
-      {displayShowAllBtn && <strong>Show all</strong>}
+      {displayShowAllBtn && (
+        <Link href={`/calendars/all?categoryId=${category.id}`}>
+          <a>
+            <b>See more </b>
+          </a>
+        </Link>
+      )}
     </div>
   );
 };

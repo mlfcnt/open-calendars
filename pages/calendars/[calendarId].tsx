@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { Loading } from "../../components/Loading";
 import { useCalendar } from "../api/calendars/[calendarId]";
+import { MainTemplate } from "../../components/templates/MainTemplate";
 
 const Calendar = () => {
   const router = useRouter();
@@ -10,16 +11,16 @@ const Calendar = () => {
   if (typeof calendarId !== "string" || !calendar) return <Loading />;
 
   return (
-    <div>
+    <MainTemplate>
       <header>
         <h1>{calendar.name}</h1>
-        {/* <h2>{calendar.description}</h2> */}
+        <h3>{calendar.description}</h3>
         <p>{calendar.stars} ⭐</p>
+        <a href={calendar.url} target="_blank" rel="noreferrer">
+          <button>Google calendar</button>
+        </a>
       </header>
-      <Link href={"/"}>
-        <a>Back to home</a>
-      </Link>
-    </div>
+    </MainTemplate>
   );
 };
 

@@ -3,8 +3,8 @@ import { useRouter } from "next/router";
 import { useSearchCalendars } from "../api/search/[searchValue]";
 import { PreviewCard } from "../../components/PreviewCard";
 import { Loading } from "../../components/Loading";
-import { Category } from ".prisma/client";
-import Link from "next/link";
+import { MainTemplate } from "../../components/templates/MainTemplate";
+import { getDistinctCategories } from "../../lib/getDistinctCategories";
 
 const Search = () => {
   const router = useRouter();
@@ -14,33 +14,28 @@ const Search = () => {
 
   if (!searchResults.length)
     return (
-      <>
+      <MainTemplate>
         <p>No calendars with a name containing {searchValue} found</p>{" "}
-        <Link href={"/"}>
-          <a>Back to home</a>
-        </Link>
-      </>
+      </MainTemplate>
     );
 
-  const distinctCategories = searchResults.reduce((categories, calendar) => {
-    if (!categories.some((x) => x.id === calendar.category.id)) {
-      categories.push(calendar.category);
-    }
-    return categories;
-  }, [] as Category[]);
+  const distinctCategories = getDistinctCategories(searchResults);
 
-  return distinctCategories.map((category) => (
-    <>
-      <PreviewCard
-        key={category.id}
-        category={category}
-        calendars={searchResults?.filter((x) => x.category.id === category.id)}
-        displayShowAllBtn={false}
-      />
-      <Link href={"/"}>
-        <a>Back to home</a>
-      </Link>
-    </>
-  ));
+  return (
+    <MainTemplate>
+      {distinctCategories.map((category) => (
+        <>
+          <PreviewCard
+            key={category.id}
+            category={category}
+            calendars={searchResults?.filter(
+              (x) => x.category.id === category.id
+            )}
+            displayShowAllBtn={false}
+          />
+        </>
+      ))}
+    </MainTemplate>
+  );
 };
 export default Search;
