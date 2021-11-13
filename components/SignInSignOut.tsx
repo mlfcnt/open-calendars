@@ -1,21 +1,24 @@
 import { useSession, signIn, signOut } from "next-auth/client";
 
 export const SignInSignOut = () => {
-  const [session, loading] = useSession();
+  const [session] = useSession();
+
+  const spanStyle = { marginRight: "30px" };
+  const divStyle = { marginBottom: "30px" };
 
   return (
     <>
       {!session && (
-        <>
-          Not signed in <br />
+        <div style={divStyle}>
+          <span style={spanStyle}>Not signed in</span>
           <button onClick={() => signIn()}>Sign in</button>
-        </>
+        </div>
       )}
       {session && (
-        <>
-          Signed in as {session?.user?.email} <br />
+        <div style={divStyle}>
+          <span style={spanStyle}>Signed in as {session?.user?.email}</span>
           <button onClick={() => signOut()}>Sign out</button>
-        </>
+        </div>
       )}
     </>
   );
