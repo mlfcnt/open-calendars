@@ -1,11 +1,12 @@
 import React from "react";
 import styles from "./style.module.css";
 import Link from "next/link";
-import { Calendar, Category } from ".prisma/client";
+import { Calendar, Category, StarsOnCalendars } from ".prisma/client";
 
 type Props = {
   category: Category;
-  calendars: Calendar[];
+  calendars: (Calendar & { starredByUsers: StarsOnCalendars[] })[];
+
   displayShowAllBtn?: boolean;
 };
 
@@ -25,7 +26,7 @@ export const PreviewCard = ({
           <a href={calendar.url} target="_blank" rel="noreferrer">
             <span> 📆</span>
           </a>
-          <span> | {calendar.stars}⭐</span>
+          <span> | {calendar.starredByUsers.length}⭐</span>
         </div>
       ))}
       {displayShowAllBtn && (

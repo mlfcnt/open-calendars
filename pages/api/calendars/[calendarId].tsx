@@ -3,7 +3,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import useSWR from "swr";
 import { fetcher } from "../../../lib/fetcher";
 import { PrismaClient } from "@prisma/client";
-import { Calendar } from ".prisma/client";
+import { Calendar, StarsOnCalendars } from ".prisma/client";
 
 export default async function calendarHandler(
   req: NextApiRequest,
@@ -18,9 +18,16 @@ export default async function calendarHandler(
     where: {
       id: Array.isArray(calendarId) ? calendarId[0] : calendarId,
     },
+    include: {
+      starredByUsers: true,
+    },
   });
   res.status(200).json(calendar);
 }
 
 export const useCalendar = (calendarId: string | string[] | undefined) =>
-  useSWR<Calendar>(calendarId ? `/api/calendars/${calendarId}` : null, fetcher);
+  useSWR<
+    Calendar & {
+      starredByUsers: StarsOnCalendars[];
+    }
+  >(calendarId ? `/api/calendars/${calendarId}` : null, fetcher);

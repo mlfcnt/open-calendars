@@ -1,5 +1,10 @@
+import { PrismaClient } from ".prisma/client";
 import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
+//@ts-ignore
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
+
+const prisma = new PrismaClient();
 
 export default NextAuth({
   // Configure one or more authentication providers
@@ -15,6 +20,5 @@ export default NextAuth({
     // ...add more providers here
   ],
 
-  // A database is optional, but required to persist accounts in a database
-  database: process.env.DATABASE_URL,
+  adapter: PrismaAdapter(prisma),
 });

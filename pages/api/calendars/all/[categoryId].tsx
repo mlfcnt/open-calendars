@@ -3,7 +3,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import useSWR from "swr";
 import { PrismaClient } from "@prisma/client";
 import { fetcher } from "../../../../lib/fetcher";
-import { CalendarWithCategory } from "../../../../types";
+import { Calendar, Category, StarsOnCalendars } from ".prisma/client";
 
 export default async function calendarsHandler(
   req: NextApiRequest,
@@ -15,19 +15,17 @@ export default async function calendarsHandler(
   if (!categoryId) return {};
   const prisma = new PrismaClient();
   const calendars = await prisma.calendar.findMany({
-    orderBy: {
-      stars: "desc",
-    },
     where: {
       categoryId: Array.isArray(categoryId) ? categoryId[0] : categoryId,
     },
-    select: {
-      id: true,
-      name: true,
-      stars: true,
-      url: true,
+    include: {
+      starredByUsers: true,
       category: true,
-      description: true,
+    },
+    orderBy: {
+      starredByUsers: {
+        _count: "desc",
+      },
     },
   });
   res.status(200).json(calendars);
@@ -36,4 +34,9 @@ export default async function calendarsHandler(
 export const useAllCalendarsForCategory = (
   categoryId: string | string[] | undefined
 ) =>
-  useSWR<CalendarWithCategory[]>(`/api/calendars/all/${categoryId}`, fetcher);
+  useSWR<
+    (Calendar & {
+      category: Category;
+      starredByUsers: StarsOnCalendars[];
+    })[]
+  >(`/api/calendars/all/${categoryId}`, fetcher);

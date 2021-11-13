@@ -3,8 +3,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { PrismaClient } from "@prisma/client";
 import useSWR from "swr";
 import { fetcher } from "../../../lib/fetcher";
-import { Calendar, Category } from "@prisma/client";
-import { CalendarWithCategory } from "../../../types";
+import { Calendar, Category, StarsOnCalendars } from ".prisma/client";
 
 export default async function calendarHandler(
   req: NextApiRequest,
@@ -21,13 +20,9 @@ export default async function calendarHandler(
         mode: "insensitive",
       },
     },
-    select: {
-      id: true,
-      name: true,
-      stars: true,
-      url: true,
+    include: {
+      starredByUsers: true,
       category: true,
-      description: true,
     },
   });
   res.status(200).json(result);
@@ -35,4 +30,10 @@ export default async function calendarHandler(
 
 export const useSearchCalendars = (
   searchValue: string | string[] | undefined
-) => useSWR<CalendarWithCategory[]>(`/api/search/${searchValue}`, fetcher);
+) =>
+  useSWR<
+    (Calendar & {
+      starredByUsers: StarsOnCalendars[];
+      category: Category;
+    })[]
+  >(`/api/search/${searchValue}`, fetcher);
