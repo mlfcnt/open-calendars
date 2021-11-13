@@ -1,6 +1,6 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
-import { Provider } from "next-auth/client";
+import { SessionProvider } from "next-auth/react";
 
 function PagesContainer({
   Component,
@@ -8,9 +8,9 @@ function PagesContainer({
 }: AppProps) {
   return (
     <main>
-      <Provider session={session}>
+      <SessionProvider session={session}>
         <Component {...pageProps} />
-      </Provider>
+      </SessionProvider>
     </main>
   );
 }

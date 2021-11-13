@@ -1,4 +1,4 @@
-import { useSession } from "next-auth/client";
+import { useSession } from "next-auth/react";
 import React, { FormEvent, useRef, useState } from "react";
 import { saveCalendar } from "../pages/api/calendars/new";
 import { useCategories } from "../pages/api/categories";
@@ -8,7 +8,11 @@ export default function AddCalendar() {
   const { data: categories } = useCategories();
   const formRef = useRef<any>();
 
-  const [userIsLoggedIn] = useSession();
+  const { data: session, status } = useSession();
+
+  const userIsLoggedIn = status === "authenticated";
+
+  console.log({ session, status });
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
