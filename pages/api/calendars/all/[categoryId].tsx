@@ -2,7 +2,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import useSWR from "swr";
 import { PrismaClient } from "@prisma/client";
-import { Calendar } from ".prisma/client";
 import { fetcher } from "../../../../lib/fetcher";
 import { CalendarWithCategory } from "../../../../types";
 

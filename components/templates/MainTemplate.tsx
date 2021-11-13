@@ -3,6 +3,7 @@ import { CalendarSearch } from "../CalendarSearch";
 import styles from "../../styles/Home.module.css";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import { SignInSignOut } from "../SignInSignOut";
 
 type Props = {
   children: React.ReactNode;
@@ -16,6 +17,7 @@ export const MainTemplate = ({ children }: Props) => {
       <header>
         <h1 className={styles.title}>open-calendars</h1>
         <h2>Easily find and share your calendars</h2>
+        <SignInSignOut />
         <CalendarSearch />
       </header>
       <main>{children}</main>

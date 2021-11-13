@@ -31,7 +31,9 @@ export const PreviewCard = ({
       {displayShowAllBtn && (
         <Link href={`/calendars/all?categoryId=${category.id}`}>
           <a>
-            <b>See more </b>
+            <button style={{ marginTop: "20px" }}>
+              See more from {category.name}
+            </button>
           </a>
         </Link>
       )}
