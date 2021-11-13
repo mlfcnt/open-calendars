@@ -1,6 +1,10 @@
-import { providers } from "next-auth/client";
+import { ClientSafeProvider, providers } from "next-auth/client";
 
-const Signin = ({ providers }) => {
+type Props = {
+  providers: Record<string, ClientSafeProvider> | null;
+};
+
+const Signin = ({ providers }: Props) => {
   console.log(providers);
 
   return (
