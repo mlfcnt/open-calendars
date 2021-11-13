@@ -11,7 +11,7 @@ export const SignInSignOut = () => {
       {!session && (
         <div style={divStyle}>
           <span style={spanStyle}>Not signed in</span>
-          <button onClick={() => signIn()}>Sign in</button>
+          <button onClick={() => signIn("google")}>Sign in with google</button>
         </div>
       )}
       {session && (
