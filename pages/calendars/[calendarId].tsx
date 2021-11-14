@@ -18,7 +18,7 @@ const Calendar = () => {
 
   const handleStarClick = async () => {
     if (!userId) {
-      alert("You must be loggin in to vote");
+      alert("You must be logged in to star this calendar");
       return;
     }
     await updateCalendarStars(calendar, calendarId, userId);
