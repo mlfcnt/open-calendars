@@ -1,9 +1,5 @@
 import React from "react";
 import { MainTemplate } from "../components/templates/MainTemplate";
-import Markdown from "markdown-to-jsx";
-//@ts-ignore
-import todoGoist from "https://api.github.com/gists/6124eed7dab71f492c454b62369dbd09";
-const todoMarkdown = todoGoist?.files["todo.md"]?.content;
 
 const Changelog = () => {
   return (
@@ -11,7 +7,18 @@ const Changelog = () => {
       <h1>Changelog</h1>
       <p>WIP... (early early alpha)</p>
       <h2>TODO</h2>
-      {todoMarkdown && <Markdown>{todoMarkdown}</Markdown>}
+      <ul>
+        <li>Add missing invalidations</li>
+        <li>Better error handling</li>
+        <li>Ability to delete our calendars & comments</li>
+        <li>Ability to report calendars & comments</li>
+        <li>iCal compatible</li>
+        <li>More auth providers (apple, github, facebook?, email?)</li>
+        <li>Better user profiles (random image + name)</li>
+        <li>Start to populate with real calendars</li>
+        <li>Better comment date formatting (submitted 2 days ago)</li>
+        <li>Styling (+ dark mode base on system style)</li>
+      </ul>
     </MainTemplate>
   );
 };

@@ -1,9 +1,11 @@
 import { useRouter } from "next/router";
 import { Loading } from "../../components/Loading";
-import { useCalendar } from "../api/calendars/[calendarId]";
 import { MainTemplate } from "../../components/templates/MainTemplate";
 import { useSession } from "next-auth/react";
-import { useUpdateCalendarStars } from "../api/calendars/update/star";
+import { AddCommentForm } from "../../components/AddCommentForm";
+import { Comments } from "../../components/Comments";
+import { useCalendar } from "../api/calendars/[calendarId]";
+import { useUpdateCalendarStars } from "../api/calendars/[calendarId]/star/update";
 
 const Calendar = () => {
   const router = useRouter();
@@ -36,6 +38,9 @@ const Calendar = () => {
           <button>Google calendar</button>
         </a>
       </header>
+      <h2>Comments</h2>
+      <Comments comments={calendar.comments} />
+      <AddCommentForm calendar={calendar} />
     </MainTemplate>
   );
 };

@@ -105,7 +105,7 @@ export const useUpdateCalendarStars = () => {
           false
         );
       }
-      await fetch("/api/calendars/update/star", {
+      await fetch(`/api/calendars/${calendarId}}/star/update`, {
         method: "POST",
         body: JSON.stringify({ calendarId, userId }),
       });
