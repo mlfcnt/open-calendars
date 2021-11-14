@@ -19,7 +19,7 @@ export default async function calendarsHandler(
         _count: "desc",
       },
     },
-    take: 10,
+    take: 100,
   });
   res.status(200).json(calendars);
 }

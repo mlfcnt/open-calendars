@@ -9,7 +9,7 @@ const Home: NextPage = () => {
   const { data: calendars = [] } = useCalendars();
   const { data: categories = [] } = useCategories();
 
-  if (!calendars.length) return <Loading />;
+  if (!calendars) return <Loading />;
 
   return (
     <MainTemplate>

@@ -14,9 +14,27 @@ export default async function calendarsHandler(
   res.status(200).json(calendars);
 }
 
-export const saveCalendar = async (category: Prisma.CalendarCreateInput) => {
-  return fetch("/api/calendars/new", {
-    method: "POST",
-    body: JSON.stringify(category),
-  });
+const validateCalendar = (calendar: Prisma.CalendarCreateInput) => {
+  const regex =
+    /https:\/\/calendar\.google\.com\/calendar\/u\/0\?cid=([a-zA-Z]+([0-9]+[a-zA-Z]+)+)/;
+  const match = regex.exec(calendar.url);
+  if (!match) {
+    alert(
+      "Invalid calendar URL, url should look like this : \nhttps://calendar.google.com/calendar/u/0?cid={{calendarId}}"
+    );
+    return;
+  } else {
+    return match[1];
+  }
+};
+
+export const saveCalendar = async (calendar: Prisma.CalendarCreateInput) => {
+  const isValid = validateCalendar(calendar);
+  return (
+    isValid &&
+    fetch("/api/calendars/new", {
+      method: "POST",
+      body: JSON.stringify(calendar),
+    })
+  );
 };

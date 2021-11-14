@@ -5,6 +5,9 @@ const prisma = new PrismaClient();
 
 const AMOUNT_OF_CALS_TO_CREATE = 10;
 
+const CREATE_CATEGORIES = true;
+const CREATE_CALENDARS = false;
+
 const categoriesToCreate = [
   "Movie",
   "TV Show",
@@ -40,19 +43,23 @@ const generateFakeCalendar = async () => {
 
 async function main() {
   console.log(`Start seeding ...`);
-  for (const c of categoriesToCreate) {
-    const category = await prisma.category.create({
-      data: {
-        name: c,
-      },
-    });
-    console.log(`Created category with id: ${category.id}`);
+  if (CREATE_CATEGORIES) {
+    for (const c of categoriesToCreate) {
+      const category = await prisma.category.create({
+        data: {
+          name: c,
+        },
+      });
+      console.log(`Created category with id: ${category.id}`);
+    }
   }
-  for (let index = 0; index < AMOUNT_OF_CALS_TO_CREATE; index++) {
-    const calendars = await prisma.calendar.create({
-      data: await generateFakeCalendar(),
-    });
-    console.log(`Created calendar with id: ${calendars.id}`);
+  if (CREATE_CALENDARS) {
+    for (let index = 0; index < AMOUNT_OF_CALS_TO_CREATE; index++) {
+      const calendars = await prisma.calendar.create({
+        data: await generateFakeCalendar(),
+      });
+      console.log(`Created calendar with id: ${calendars.id}`);
+    }
   }
   console.log(`Seeding finished.`);
 }

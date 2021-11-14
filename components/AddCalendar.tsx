@@ -17,8 +17,11 @@ export default function AddCalendar() {
 
     const form = formRef.current;
 
+    //TODO mutation
+
     saveCalendar({
       name: form?.name?.value,
+      //TODO regex
       url: form?.url?.value,
       description: form?.description?.value,
       category: {
