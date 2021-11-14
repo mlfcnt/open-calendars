@@ -32,23 +32,28 @@ model Calendar {
 }
 
 model Account {
-  id                 String    @id @default(cuid()) @map("_id") @db.ObjectId
+  id                 String  @id @default(cuid()) @map("_id")
   userId             String
-  providerType       String
-  providerId         String
+  type               String
+  provider           String
   providerAccountId  String
-  refreshToken       String?
-  accessToken        String?
-  accessTokenExpires DateTime?
-  createdAt          DateTime  @default(now())
-  updatedAt          DateTime  @updatedAt
-  user               User      @relation(fields: [userId], references: [id])
+  refresh_token      String?
+  access_token       String?
+  expires_at         Int?
+  token_type         String?
+  scope              String?
+  id_token           String?
+  session_state      String?
+  oauth_token_secret String?
+  oauth_token        String?
 
-  @@unique([providerId, providerAccountId])
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
 }
 
 model Session {
-  id           String   @id @default(cuid()) @map("_id") @db.ObjectId
+  id           String   @id @default(cuid()) @map("_id")
   sessionToken String   @unique
   userId       String
   expires      DateTime
@@ -56,7 +61,7 @@ model Session {
 }
 
 model User {
-  id               String             @id @default(cuid()) @map("_id") @db.ObjectId
+  id               String             @id @default(cuid()) @map("_id")
   name             String?
   email            String?            @unique
   emailVerified    DateTime?

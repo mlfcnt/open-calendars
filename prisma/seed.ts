@@ -3,7 +3,7 @@ import faker from "faker";
 
 const prisma = new PrismaClient();
 
-const AMOUNT_OF_CALS_TO_CREATE = 10;
+const AMOUNT_OF_CALS_TO_CREATE = 50;
 
 const categoriesToCreate = [
   "Movie",
