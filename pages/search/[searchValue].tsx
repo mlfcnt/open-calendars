@@ -24,16 +24,14 @@ const Search = () => {
   return (
     <MainTemplate>
       {distinctCategories.map((category) => (
-        <>
-          <PreviewCard
-            key={category.id}
-            category={category}
-            calendars={searchResults?.filter(
-              (x) => x.category.id === category.id
-            )}
-            displayShowAllBtn={false}
-          />
-        </>
+        <PreviewCard
+          key={category.id}
+          category={category}
+          calendars={searchResults?.filter(
+            (x) => x.category.id === category.id
+          )}
+          displayShowAllBtn={false}
+        />
       ))}
     </MainTemplate>
   );
