@@ -3,34 +3,25 @@ import { Loading } from "../../components/Loading";
 import { useCalendar } from "../api/calendars/[calendarId]";
 import { MainTemplate } from "../../components/templates/MainTemplate";
 import { useSession } from "next-auth/react";
-
-import { updateCalendar } from "../api/calendars/update";
+import { useUpdateCalendarStars } from "../api/calendars/update/star";
 
 const Calendar = () => {
   const router = useRouter();
   const { data: session } = useSession();
 
-  const userIsLoggedIn = !!session?.user;
+  const userId = session?.user?.id;
   const { calendarId } = router.query;
   const { data: calendar } = useCalendar(calendarId);
+  const updateCalendarStars = useUpdateCalendarStars();
 
   if (typeof calendarId !== "string" || !calendar) return <Loading />;
 
-  const handleClick = () => {
-    if (!userIsLoggedIn) {
+  const handleStarClick = async () => {
+    if (!userId) {
       alert("You must be loggin in to vote");
       return;
     }
-    updateCalendar({
-      starredByUsers: {
-        connect: {
-          calendarId_userId: {
-            calendarId,
-            userId: session.user as string,
-          },
-        },
-      },
-    });
+    await updateCalendarStars(calendar, calendarId, userId);
   };
 
   return (
@@ -38,7 +29,7 @@ const Calendar = () => {
       <header>
         <h1>{calendar.name}</h1>
         <h3>{calendar.description}</h3>
-        <p style={{ cursor: "pointer" }} onClick={handleClick}>
+        <p style={{ cursor: "pointer" }} onClick={handleStarClick}>
           {calendar.starredByUsers.length} ⭐
         </p>
         <a href={calendar.url} target="_blank" rel="noreferrer">

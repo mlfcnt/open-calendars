@@ -81,7 +81,7 @@ model VerificationToken {
 
 model StarsOnCalendars {
   id         String   @id @default(dbgenerated()) @map("_id") @db.ObjectId
-  calendar   Calendar @relation(fields: [calendarId], references: [id])
+  calendar   Calendar @relation(fields: [calendarId], references: [id], onDelete: Cascade)
   calendarId String // relation scalar field (used in the `@relation` attribute above)
   user       User     @relation(fields: [userId], references: [id])
   userId     String // relation scalar field (used in the `@relation` attribute above)

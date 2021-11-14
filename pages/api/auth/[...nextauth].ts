@@ -21,23 +21,19 @@ export default NextAuth({
   ],
   callbacks: {
     async signIn({ user, account, profile, email, credentials }) {
-      console.log("inside signIn", {
-        user,
-        account,
-        profile,
-        email,
-        credentials,
-      });
-
       return true;
     },
     async redirect({ url, baseUrl }) {
-      console.log("inside redirect", { url, baseUrl });
       return baseUrl;
     },
     async session({ session, user, token }) {
-      console.log("inside session", { session, user, token });
-      return session;
+      return {
+        ...session,
+        user: {
+          ...user,
+          id: user.id,
+        },
+      };
     },
   },
 });

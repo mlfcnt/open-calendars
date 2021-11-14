@@ -22,7 +22,10 @@ export const MainTemplate = ({
   return (
     <div>
       <header>
-        <h1 className={styles.title}>open-calendars</h1>
+        <Link href="/" passHref>
+          <h1 className={styles.title}>open-calendars</h1>
+        </Link>
+
         <h2>Easily find and share your calendars</h2>
         <SignInSignOut />
         {showSearch && <CalendarSearch />}
