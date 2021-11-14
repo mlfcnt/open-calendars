@@ -8,11 +8,9 @@ export default function AddCalendar() {
   const { data: categories } = useCategories();
   const formRef = useRef<any>();
 
-  const { data: session, status } = useSession();
+  const { status } = useSession();
 
   const userIsLoggedIn = status === "authenticated";
-
-  console.log({ session, status });
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();

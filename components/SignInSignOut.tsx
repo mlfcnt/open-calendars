@@ -4,7 +4,6 @@ export const SignInSignOut = () => {
   const { data: session } = useSession();
 
   const userIsLoggedIn = !!session?.user;
-
   const spanStyle = { marginRight: "30px" };
   const divStyle = { marginBottom: "30px" };
 
