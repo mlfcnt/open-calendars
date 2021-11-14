@@ -13,12 +13,25 @@ export default async function calendarHandler(
     query: { searchValue },
   } = req;
   const prisma = new PrismaClient();
+  const formattedSearchValue = Array.isArray(searchValue)
+    ? searchValue[0]
+    : searchValue;
   const result = await prisma.calendar.findMany({
     where: {
-      name: {
-        contains: Array.isArray(searchValue) ? searchValue[0] : searchValue,
-        mode: "insensitive",
-      },
+      OR: [
+        {
+          name: {
+            contains: formattedSearchValue,
+            mode: "insensitive",
+          },
+        },
+        {
+          description: {
+            contains: formattedSearchValue,
+            mode: "insensitive",
+          },
+        },
+      ],
     },
     include: {
       starredByUsers: true,

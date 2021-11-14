@@ -76,6 +76,8 @@ export const useUpdateCalendarStars = () => {
         (x) => x.calendarId === calendarId && x.userId === userId
       );
 
+      //TODO il faudrait aussi invalider /api/calendars/
+
       if (!isAlreadyStarred) {
         mutate(
           `/api/calendars/${calendarId}`,
