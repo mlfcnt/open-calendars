@@ -69,7 +69,6 @@ model User {
   accounts         Account[]
   sessions         Session[]
   starredCalendars StarsOnCalendars[]
-
 }
 
 model VerificationToken {
