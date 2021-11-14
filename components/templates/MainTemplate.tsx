@@ -25,6 +25,9 @@ export const MainTemplate = ({
         <Link href="/" passHref>
           <h1 className={styles.title}>open-calendars</h1>
         </Link>
+        <Link href="/changelog" passHref>
+          <span style={{ cursor: "pointer" }}>(Changelog / todo)</span>
+        </Link>
 
         <h2>Easily find and share your calendars</h2>
         <SignInSignOut />

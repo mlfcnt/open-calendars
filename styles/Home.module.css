@@ -1,4 +1,6 @@
 .title {
   cursor: pointer;
   text-align: center;
+  display: inline;
+  margin-right: 10px;
 }
