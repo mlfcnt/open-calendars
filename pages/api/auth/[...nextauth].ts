@@ -24,7 +24,7 @@ export default NextAuth({
       return true;
     },
     async redirect({ url, baseUrl }) {
-      return baseUrl;
+      return url;
     },
     //@ts-ignore //TODO: fix this
     async session({ session, user, token }) {

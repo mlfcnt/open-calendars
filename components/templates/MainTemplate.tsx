@@ -38,7 +38,7 @@ export const MainTemplate = ({
       {!isHome && (
         <footer style={{ marginTop: "100px" }}>
           <Link href={"/"}>
-            <a>⬅️ Back to home</a>
+            <a>⬅️ Back home</a>
           </Link>
         </footer>
       )}

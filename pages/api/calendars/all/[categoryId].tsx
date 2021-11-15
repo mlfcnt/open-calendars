@@ -28,15 +28,21 @@ export default async function calendarsHandler(
       },
     },
   });
-  res.status(200).json(calendars);
+  const category = await prisma.category.findUnique({
+    where: {
+      id: Array.isArray(categoryId) ? categoryId[0] : categoryId,
+    },
+  });
+  res.status(200).json({ calendars, category });
 }
 
 export const useAllCalendarsForCategory = (
   categoryId: string | string[] | undefined
 ) =>
-  useSWR<
-    (Calendar & {
+  useSWR<{
+    calendars: (Calendar & {
       category: Category;
       starredByUsers: StarsOnCalendars[];
-    })[]
-  >(`/api/calendars/all/${categoryId}`, fetcher);
+    })[];
+    category: Category;
+  }>(`/api/calendars/all/${categoryId}`, fetcher);
