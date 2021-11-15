@@ -12,6 +12,8 @@ const Changelog = () => {
         <li>Better error handling</li>
         <li>Ability to delete our calendars & comments</li>
         <li>Ability to report calendars & comments</li>
+        <li>Ability to respond to comments</li>
+        <li>Ability to see if the creator posted this comment</li>
         <li>iCal compatible</li>
         <li>More auth providers (apple, github, facebook?, email?)</li>
         <li>Better user profiles (random image + name)</li>
