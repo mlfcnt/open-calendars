@@ -39,7 +39,7 @@ const Calendar = () => {
         </a>
       </header>
       <h2>Comments</h2>
-      <Comments comments={calendar.comments} />
+      <Comments comments={calendar.comments} calendar={calendar} />
       <AddCommentForm calendar={calendar} />
     </MainTemplate>
   );
